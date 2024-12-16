@@ -2,21 +2,25 @@ import "./bootstrapita/index.bundle";
 import "./bootstrapita/global.css";
 import { useState } from "react";
 function App() {
-  const [data, setData] = useState("");
+  function setData(value) {
+    console.log(value);
+  }
   return (
     <div className="App">
       <div id="Translation">
         <h1>Translated article</h1>
-        {data}
         <div className="p-3">
-          <bsi-input
-            id="exampleInputText"
-            label="Inserisci il tuo nome"
-            onInput={(e) => setData(e.target.value)}
-          ></bsi-input>
-          <bsi-button onClick={() => alert("ciao")} variant="primary">
-            Send
-          </bsi-button>
+          <form action={setData}>
+            <bsi-input
+              id="exampleInputText"
+              label="Inserisci il tuo nome"
+              // onInput={(e) => setData(e.target.value)}
+              name="name"
+            ></bsi-input>
+            <bsi-button type="submit" variant="primary">
+              Send
+            </bsi-button>
+          </form>
           <bsi-button variant="primary" outline="true">
             Cancel
           </bsi-button>
