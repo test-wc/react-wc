@@ -1,21 +1,30 @@
 import "./bootstrapita/index.bundle";
 import "./bootstrapita/global.css";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+
 function App() {
-  function setData(value) {
-    console.log(value);
+  function setData(formData) {
+    console.log(formData.get("name"));
   }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log(data);
+
   return (
     <div className="App">
       <div id="Translation">
         <h1>Translated article</h1>
         <div className="p-3">
-          <form action={setData}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <bsi-input
-              id="exampleInputText"
               label="Inserisci il tuo nome"
-              // onInput={(e) => setData(e.target.value)}
-              name="name"
+              {...register("name")}
             ></bsi-input>
             <bsi-button type="submit" variant="primary">
               Send
